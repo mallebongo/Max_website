@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platen Alignment Expert System</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Plotly.js CDN -->
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <!-- jsPDF CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <h1>Platen Alignment Expert System</h1>
+
+    <div class="controls">
+        <label for="printerModel">Printer Model:</label>
+        <select id="printerModel"></select>
+        <button id="generateGridBtn">Generate Grid</button>
+    </div>
+
+    <div id="gridContainer">
+        <!-- Measurement grid will be generated here -->
+        <p>Select a printer model and click "Generate Grid".</p>
+    </div>
+
+    <div class="action-buttons">
+        <button id="plotBtn" disabled>3D Plot Current</button>
+        <button id="saveBeforeBtn" disabled>Save Before</button>
+        <button id="loadBeforeBtn">Load Before</button>
+        <button id="saveAfterBtn" disabled>Save After</button>
+        <button id="loadAfterBtn">Load After</button>
+        <button id="compareBtn" disabled>Compare</button>
+        <button id="adjustBtn" disabled>Get Adjustments</button>
+        <button id="exportPdfBtn" disabled>Export PDF</button>
+    </div>
+
+    <!-- Hidden file inputs for loading -->
+    <input type="file" id="loadBeforeFile" accept=".csv" style="display: none;">
+    <input type="file" id="loadAfterFile" accept=".csv" style="display: none;">
+
+    <div id="plotContainer">
+        <h2>Current Measurements Plot</h2>
+        <div id="currentPlotDiv"></div>
+    </div>
+
+    <div id="compareContainer" style="display: none;">
+        <h2>Comparison: Before vs. After</h2>
+        <div class="compare-plots">
+            <div id="comparePlotBeforeDiv"><h3>Before</h3></div>
+            <div id="comparePlotAfterDiv"><h3>After</h3></div>
+        </div>
+    </div>
+
+    <div id="adjustmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Adjustment Recommendations</h2>
+            <pre id="adjustmentText"></pre>
+             <p class="safety-note">
+                <strong>Safety Note:</strong><br>
+                Adjust Front and Back separately, and re-measure after each adjustment.<br>
+                Be cautious of neighbor influence which may require manual inspection.
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
